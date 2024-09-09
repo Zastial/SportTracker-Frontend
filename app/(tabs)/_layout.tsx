@@ -1,35 +1,35 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    <Tabs>
       <Tabs.Screen
-        name="index"
+        name="mainPage"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          title: 'Accueil',
+          tabBarIcon: ({ color }) => <Ionicons name="menu" size={24} color={color} />,
+        }}
+      />        
+      <Tabs.Screen
+        name="football"
+        options={{
+          title: 'Football',
+          tabBarIcon: ({ color }) => <Ionicons name="football" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="basketball"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          title: 'Basketball',
+          tabBarIcon: ({ color }) => <Ionicons name="basketball" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="formulaOne"
+        options={{
+          title: 'Formule 1',
+          tabBarIcon: ({ color }) => <Ionicons name="car-sport" size={24} color={color} />,
         }}
       />
     </Tabs>
