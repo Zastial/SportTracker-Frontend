@@ -8,7 +8,8 @@ export default function TabLayout() {
         name="mainPage"
         options={{
           title: 'Accueil',
-          tabBarIcon: ({ color }) => <Ionicons name="menu" size={24} color={color} />,
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
         }}
       />        
       <Tabs.Screen
@@ -26,7 +27,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="formulaOne"
+        name="formula1"
         options={{
           title: 'Formule 1',
           tabBarIcon: ({ color }) => <Ionicons name="car-sport" size={24} color={color} />,
