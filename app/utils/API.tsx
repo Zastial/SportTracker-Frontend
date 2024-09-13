@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { FormulaGP } from '../models/formula';
 
+let URL = "http://sporttrackerapi.sunlamander.tech/"
+
 export const getFormulaGPs = async (): Promise<FormulaGP[]> => {
   try {
-    const response = await axios.get<FormulaGP[]>('http://127.0.0.1:8000/formula');
+    const response = await axios.get<FormulaGP[]>(URL + 'formula');
     return response.data;
   } catch (error) {
-    console.error('Erreur lors de la récupération des données Formula GP:', error);
     throw error;
   }
 };

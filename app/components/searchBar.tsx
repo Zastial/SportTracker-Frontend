@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 
 import SportCard from './sportCard';
 
-const sportList = ['Football', 'Basketball', 'Formula1'];
+export const sportList = ['Football', 'Basketball', 'Formula1'];
 
 interface SearchBarProps {
   router: ReturnType<typeof useRouter>;

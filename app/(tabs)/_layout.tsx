@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function TabLayout() {
   return (
@@ -17,6 +18,7 @@ export default function TabLayout() {
         options={{
           title: 'Football',
           tabBarIcon: ({ color }) => <Ionicons name="football" size={24} color={color} />,
+          headerRight: () => <FavoriteButton sportName="football" />,
         }}
       />
       <Tabs.Screen
@@ -24,6 +26,7 @@ export default function TabLayout() {
         options={{
           title: 'Basketball',
           tabBarIcon: ({ color }) => <Ionicons name="basketball" size={24} color={color} />,
+          headerRight: () => <FavoriteButton sportName="basketball" />,
         }}
       />
       <Tabs.Screen
@@ -31,6 +34,7 @@ export default function TabLayout() {
         options={{
           title: 'Formule 1',
           tabBarIcon: ({ color }) => <Ionicons name="car-sport" size={24} color={color} />,
+          headerRight: () => <FavoriteButton sportName="formula1" />,
         }}
       />
     </Tabs>

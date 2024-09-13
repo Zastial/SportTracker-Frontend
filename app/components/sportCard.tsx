@@ -1,24 +1,28 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
-let imgMapping = new Map<string, string>([
-    ["Football", "assets/images/football.png"],
-    ["Basketball", "assets/images/basketball.png"],
-    ["Formula1", "assets/images/formula1.png"]
-]);
+const imgMapping = {
+    "Football": require('../../assets/images/football.png'),
+    "Basketball": require('../../assets/images/basketball.png'),
+    "Formula1": require('../../assets/images/formula1.png')
+};
 
 interface SportCardProps {
     sportName: string;
     onPress: () => void;
 }
 
+const screenWidth = Dimensions.get('window').width;
+const cardWidth = (screenWidth - 40) / 2; // 40 pour le padding (20 de chaque côté)
+const imageSize = cardWidth * 0.7; // L'image prendra 70% de la largeur de la carte
+
 export default class SportCard extends React.Component<SportCardProps> {
     render() {
         return (
-            <TouchableOpacity onPress={this.props.onPress} style={styles.container}>
-                <View style={styles.imageContainer}>
+            <TouchableOpacity onPress={this.props.onPress} style={[styles.container, { width: cardWidth }]}>
+                <View style={[styles.imageContainer, { width: imageSize, height: imageSize }]}>
                     <Image
-                        source={{ uri: imgMapping.get(this.props.sportName) }}
+                        source={imgMapping[this.props.sportName as keyof typeof imgMapping]}
                         style={styles.image}
                     />
                 </View>
@@ -31,12 +35,11 @@ export default class SportCard extends React.Component<SportCardProps> {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        padding: 15,
+        padding: 10,
+        margin: 5,
     },
     imageContainer: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        borderRadius: 1000, // Une grande valeur pour assurer un cercle parfait
         overflow: 'hidden',
         marginBottom: 10,
     },
@@ -45,7 +48,8 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     sportName: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
+        textAlign: 'center',
     },
 });
