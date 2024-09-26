@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { sportList } from './searchBar';
 import { useColorScheme } from 'react-native';
 import { LightPalette, DarkPalette } from '../../constants/Palette';
+import FavoriteButton from './favoriteButton';
 
 interface TopBarProps {
     pageName: string;
@@ -39,6 +40,7 @@ const TopBar: React.FC<TopBarProps> = ({ pageName }) => {
             <Ionicons name="menu" size={36} color={palette.text} />
           </TouchableOpacity>
           <Text style={[styles.title, { color: palette.text }]}>{pageName}</Text>
+          <FavoriteButton sportName={pageName} />
         </View>
         {menuVisible && (
           <View style={[styles.menuContent, { backgroundColor: palette.background }]}>
@@ -82,13 +84,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textDecorationLine: 'underline',
+    fontFamily: 'Poppins',
   },
   menuItem: {
+    fontFamily: 'Poppins',
     padding: 10,
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
 });
   

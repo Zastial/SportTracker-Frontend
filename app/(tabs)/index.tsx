@@ -51,12 +51,7 @@ export default function MainPageScreen() {
     fetchData();
   }, [fetchData]);
 
-
-  const flatListOpacity = useRef(new Animated.Value(1)).current;
-  const handleScroll = Animated.event(
-    [{ nativeEvent: { contentOffset: { y: flatListOpacity } } }],
-    { useNativeDriver: false }
-  );
+  
   const renderFavoriteItem = ({ item }: { item: string }) => (
     <TouchableOpacity
       style={{
@@ -67,7 +62,10 @@ export default function MainPageScreen() {
       }}
       onPress={() => setSelectedSport(item)}
     >
-      <Text style={{ color: item === selectedSport ? palette.background : palette.text }}>
+      <Text style={{ 
+        color: item === selectedSport ? palette.background : palette.text,
+        fontFamily: 'Poppins',
+      }}>
         {item}
       </Text>
     </TouchableOpacity>
@@ -99,36 +97,31 @@ export default function MainPageScreen() {
       )}
       {!loading && (
         favorites.length > 0 ? (
-          <>
-            <Animated.View style={{ opacity: flatListOpacity.interpolate({
-                inputRange: [0, 50],
-                outputRange: [1, 0],
-                extrapolate: 'clamp',
-              }) }}>
-                <FlatList
-                  data={favorites}
-                  renderItem={renderFavoriteItem}
-                  keyExtractor={(item) => item}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  style={{ paddingHorizontal: 10, paddingTop: 20 }}
-                />
-              </Animated.View>
-            <ScrollView
-              contentContainerStyle={{ paddingTop: 10 }}
-              refreshControl={
-                <RefreshControl 
-                  refreshing={refreshing} 
-                  onRefresh={onRefresh}
-                  tintColor={palette.primary}
-                />
-              }
-              onScroll={handleScroll}
-              scrollEventThrottle={16}
-            >
-              <Favorites favorites={favorites} refreshKey={refreshKey} />
-            </ScrollView>
-          </>
+          <View style={{ flex: 1 }}>
+            <View style={{ height: 50, paddingHorizontal: 10, paddingTop: 10, marginBottom: 10 }}>
+              <FlatList
+                data={favorites}
+                renderItem={renderFavoriteItem}
+                keyExtractor={(item) => item}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <ScrollView
+                contentContainerStyle={{ flexGrow: 1 }}
+                refreshControl={
+                  <RefreshControl 
+                    refreshing={refreshing} 
+                    onRefresh={onRefresh}
+                    tintColor={palette.primary}
+                  />
+                }
+              >
+                <Favorites favorites={favorites} refreshKey={refreshKey} />
+              </ScrollView>
+            </View>
+          </View>
         ) : (
           <SearchBar router={undefined} />
         )

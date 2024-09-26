@@ -6,7 +6,6 @@ import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { EngToFr } from '../../utils/formula1/Language';
 import { NameToCircuitIMG } from '../../utils/formula1/CircuitIMG';
-import { addHours } from 'date-fns';
 import { useColorScheme } from 'react-native';
 import { LightPalette, DarkPalette } from '../../../constants/Palette';
 
@@ -53,7 +52,7 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
     const endDate = parseISO(groupedGPs.events[groupedGPs.events.length - 1].date);
     const dateRange = `${format(startDate, 'd', { locale: fr })} - ${format(endDate, 'd MMM', { locale: fr })}`.toUpperCase();
   return (
-    <View>
+    <View style={{ flex: 1, paddingBottom: 50 }}>
         <Card containerStyle={[styles.card, { backgroundColor: palette.primary }]}>
             <View style={styles.headerContainer}>
                 <View>
@@ -100,15 +99,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Poppins',
   },
   subtitle: {
     fontSize: 16,
     color: 'gray',
+    fontFamily: 'Poppins',
   },
   dateRange: {
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 5,
+    fontFamily: 'Poppins',
   },
   imageContainer: {
     borderRadius: 10,
@@ -142,21 +144,23 @@ const styles = StyleSheet.create({
   },
   day: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   weekday: {
     fontSize: 14,
+    fontFamily: 'Poppins',
   },
   eventDetails: {
     alignItems: 'flex-end',
   },
   raceType: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   time: {
     fontSize: 14,
     color: 'gray',
+    fontFamily: 'Poppins',
   },
 });
 

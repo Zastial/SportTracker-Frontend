@@ -52,7 +52,7 @@ export default function Formula1Screen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <TopBar pageName="Formule 1" />
+      <TopBar pageName="Formula1" />
       <FormulaGPCard gps={formulaGPs} />
     </ScrollView>
   );

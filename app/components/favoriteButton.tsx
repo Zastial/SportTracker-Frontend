@@ -9,8 +9,13 @@ interface FavoriteButtonProps {
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ sportName }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    if (sportName === 'SportTracker') {
+      setHidden(true)
+    }
+
     loadFavoriteStatus(sportName).then(status => {
       if (status !== undefined || status !== null) {
         setIsFavorite(status);
@@ -31,6 +36,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ sportName }) => {
         name={isFavorite ? 'star' : 'star-outline'}
         size={24}
         color={isFavorite ? 'gold' : 'gray'}
+        style={{ display: hidden ? 'none' : 'flex' }}
       />
     </TouchableOpacity>
   );
