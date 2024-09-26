@@ -19,11 +19,6 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ sportName }) => {
   }, [sportName]);
 
   const handleToggleFavorite = async () => {
-
-    // const value = await resetFavorite();
-    // console.log("VALUE : " + value);
-
-    // console.log("BUTTON : " + sportName + " " + isFavorite);
     const newStatus = await toggleFavorite(sportName, isFavorite);
     if (newStatus !== undefined) {
       setIsFavorite(newStatus);

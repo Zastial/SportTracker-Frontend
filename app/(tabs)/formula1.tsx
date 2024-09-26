@@ -9,7 +9,7 @@ export default function Formula1Screen() {
   const [formulaGPs, setFormulaGPs] = useState<FormulaGP[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const fetchData = async () => {
+  const fetchFormulaGPData = async () => {
     try {
       const data = await getFormulaGPs();
       setFormulaGPs(data);
@@ -23,12 +23,12 @@ export default function Formula1Screen() {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchFormulaGPData();
   }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    fetchData();
+    fetchFormulaGPData();
   }, []);
 
   if (loading) {

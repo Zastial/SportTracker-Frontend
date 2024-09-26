@@ -4,7 +4,8 @@ import { Card, Text } from '@rneui/themed';
 import { FormulaGP } from '../../models/formula';
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { EngToFr } from '../../utils/Language';
+import { EngToFr } from '../../utils/formula1/Language';
+import { NameToCircuitIMG } from '../../utils/formula1/CircuitIMG';
 
 interface GroupedFormulaGP {
   name: string;
@@ -47,7 +48,7 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
     const dateRange = `${format(startDate, 'd', { locale: fr })} - ${format(endDate, 'd MMM', { locale: fr })}`.toUpperCase();
 
   return (
-    <ScrollView>
+    <View>
         <Card containerStyle={styles.card}>
             <View style={styles.headerContainer}>
                 <View>
@@ -56,8 +57,10 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
                     <Text style={styles.dateRange}>{dateRange}</Text>
                 </View>
             </View>
-            <Card.Image source={{ uri: groupedGPs.circuit.image }} style={styles.image} />
-            <ScrollView style={styles.eventsContainer}>
+            <View style={styles.imageContainer}>
+                <Card.Image source={NameToCircuitIMG(groupedGPs.name)} style={styles.image} />
+            </View>
+            <View style={styles.eventsContainer}>
                 {groupedGPs.events.map((event, index) => (
                 <View key={event.id} style={[styles.eventItem, index === 0 && styles.nextEvent]}>
                     <View style={styles.eventContent}>
@@ -72,9 +75,9 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
                     </View>
                 </View>
                 ))}
-            </ScrollView>
+            </View>
         </Card>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -102,10 +105,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
   },
-  image: {
-    height: 150,
+  imageContainer: {
     borderRadius: 10,
     marginBottom: 10,
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
   },
   eventsContainer: {
     // maxHeight: 200,

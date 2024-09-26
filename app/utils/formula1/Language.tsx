@@ -4,6 +4,12 @@ export const EngToFr = (raceType: string): string => {
             return 'Course';
         case 'Sprint':
             return 'Sprint';
+        case '1st Sprint Shootout':
+            return 'Sprint Shootout 1';
+        case '2nd Sprint Shootout':
+            return 'Sprint Shootout 2';
+        case '3rd Sprint Shootout':
+            return 'Sprint Shootout 3';
         case '1st Qualifying':
             return 'Qualification 1';
         case '2nd Qualifying':
