@@ -6,6 +6,7 @@ import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { EngToFr } from '../../utils/formula1/Language';
 import { NameToCircuitIMG } from '../../utils/formula1/CircuitIMG';
+import { addHours } from 'date-fns';
 
 interface GroupedFormulaGP {
   name: string;
@@ -70,7 +71,7 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
                         </View>
                         <View style={styles.eventDetails}>
                             <Text style={styles.raceType}>{EngToFr(event.race_type)}</Text>
-                            <Text style={styles.time}>{format(parseISO(event.date), 'HH:mm')}</Text>
+                            <Text style={styles.time}>{format(addHours(parseISO(event.date), 2), 'HH:mm')}</Text>
                         </View>
                     </View>
                 </View>

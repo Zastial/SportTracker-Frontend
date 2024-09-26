@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 
-import SportCard from './sportCard';
+import SportSearchCard from './sportSearchCard';
 
 export const sportList = ['Football', 'Basketball', 'Formula1'];
 
@@ -32,7 +32,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
     const cards: React.JSX.Element[] = []
     this.state.filteredSports.forEach(sport => {
       cards.push(
-      <SportCard key={sport} sportName={sport} onPress={() => this.handleSportPress(sport)} />)
+      <SportSearchCard key={sport} sportName={sport} onPress={() => this.handleSportPress(sport)} />)
     })
     return cards
   }

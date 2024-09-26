@@ -16,7 +16,7 @@ const screenWidth = Dimensions.get('window').width;
 const cardWidth = (screenWidth - 40) / 2; // 40 pour le padding (20 de chaque côté)
 const imageSize = cardWidth * 0.7; // L'image prendra 70% de la largeur de la carte
 
-export default class SportCard extends React.Component<SportCardProps> {
+export default class SportSearchCard extends React.Component<SportCardProps> {
     render() {
         return (
             <TouchableOpacity onPress={this.props.onPress} style={[styles.container, { width: cardWidth }]}>

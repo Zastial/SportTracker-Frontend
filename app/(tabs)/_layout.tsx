@@ -1,16 +1,21 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import FavoriteButton from '../components/FavoriteButton';
+import FavoriteButton from '../components/favoriteButton';
+import { View } from 'react-native';
 
 export default function TabLayout() {
   return (
-    <Tabs>
+    <Tabs screenOptions={{
+      headerStyle: {
+        backgroundColor: 'transparent',
+      },
+    }}>
       <Tabs.Screen
-        name="mainPage"
+        name="index"
         options={{
-          title: 'Accueil',
-          headerShown: false,
+          title: 'Favoris',
           tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
+          headerShown: false,
         }}
       />        
       <Tabs.Screen
