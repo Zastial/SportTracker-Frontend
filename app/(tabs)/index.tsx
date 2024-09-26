@@ -3,19 +3,19 @@ import { View, ScrollView, Text, Platform, RefreshControl, FlatList, TouchableOp
 import { useFocusEffect } from '@react-navigation/native';
 import SearchBar from '../components/searchBar';
 import { sportList } from '../components/searchBar';
-import FormulaGPCard from '../components/formula1/GPCard';
 import { loadFavoriteStatus } from '../utils/Favorite';
-import { getFormulaGPs } from '../utils/API';
 import * as Progress from 'react-native-progress';
 import { LightPalette, DarkPalette } from '../../constants/Palette';
 import Favorites from '../components/favorites';
 import { useColorScheme } from 'react-native';
+import TopBar from '../components/topBar';
 
 export default function MainPageScreen() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const colorScheme = useColorScheme();
   const palette = colorScheme === 'dark' ? DarkPalette : LightPalette;
@@ -47,6 +47,7 @@ export default function MainPageScreen() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    setRefreshKey(prevKey => prevKey + 1);
     fetchData();
   }, [fetchData]);
 
@@ -78,6 +79,7 @@ export default function MainPageScreen() {
       backgroundColor: palette.background,
       paddingTop: 50,
     }}>
+      <TopBar pageName="SportTracker" />
       {loading && (
         <View style={{ 
           position: 'absolute', 
@@ -109,7 +111,7 @@ export default function MainPageScreen() {
                   keyExtractor={(item) => item}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  style={{ marginBottom: 10, paddingHorizontal: 10 }}
+                  style={{ paddingHorizontal: 10, paddingTop: 20 }}
                 />
               </Animated.View>
             <ScrollView
@@ -124,7 +126,7 @@ export default function MainPageScreen() {
               onScroll={handleScroll}
               scrollEventThrottle={16}
             >
-              <Favorites favorites={favorites} />
+              <Favorites favorites={favorites} refreshKey={refreshKey} />
             </ScrollView>
           </>
         ) : (

@@ -7,6 +7,8 @@ import { fr } from 'date-fns/locale';
 import { EngToFr } from '../../utils/formula1/Language';
 import { NameToCircuitIMG } from '../../utils/formula1/CircuitIMG';
 import { addHours } from 'date-fns';
+import { useColorScheme } from 'react-native';
+import { LightPalette, DarkPalette } from '../../../constants/Palette';
 
 interface GroupedFormulaGP {
   name: string;
@@ -21,6 +23,9 @@ interface GroupedFormulaGP {
 }
 
 const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
+  const colorScheme = useColorScheme();
+  const palette = colorScheme === 'dark' ? DarkPalette : LightPalette;
+
     if (gps.length === 0) {
       return (
         <Card containerStyle={styles.card}>
@@ -47,14 +52,13 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
     const startDate = parseISO(groupedGPs.events[0].date);
     const endDate = parseISO(groupedGPs.events[groupedGPs.events.length - 1].date);
     const dateRange = `${format(startDate, 'd', { locale: fr })} - ${format(endDate, 'd MMM', { locale: fr })}`.toUpperCase();
-
   return (
     <View>
-        <Card containerStyle={styles.card}>
+        <Card containerStyle={[styles.card, { backgroundColor: palette.primary }]}>
             <View style={styles.headerContainer}>
                 <View>
                     <Text style={styles.title}>{groupedGPs.name}</Text>
-                    <Text style={styles.subtitle}>{groupedGPs.location.city}</Text>
+                    <Text style={[styles.subtitle, { color: palette.text }]}>{groupedGPs.location.city}</Text>
                     <Text style={styles.dateRange}>{dateRange}</Text>
                 </View>
             </View>
@@ -71,7 +75,7 @@ const FormulaGPCard: React.FC<{ gps: FormulaGP[] }> = ({ gps }) => {
                         </View>
                         <View style={styles.eventDetails}>
                             <Text style={styles.raceType}>{EngToFr(event.race_type)}</Text>
-                            <Text style={styles.time}>{format(addHours(parseISO(event.date), 2), 'HH:mm')}</Text>
+                            <Text style={[styles.time, {color: palette.text}]}>{format(parseISO(event.date), 'HH:mm')}</Text>
                         </View>
                     </View>
                 </View>

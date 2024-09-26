@@ -5,9 +5,10 @@ import { getFormulaGPs } from '../utils/API';
 
 interface FavoritesProps {
     favorites: string[];
+    refreshKey: number;
 }
 
-export default function Favorites({ favorites }: FavoritesProps) {
+export default function Favorites({ favorites, refreshKey }: FavoritesProps) {
     const [formulaGPs, setFormulaGPs] = useState<any[]>([]);
 
     const fetchFormulaGPs = useCallback(async () => {
@@ -23,7 +24,7 @@ export default function Favorites({ favorites }: FavoritesProps) {
         if (favorites.includes('Formula1')) {
             fetchFormulaGPs();
         }
-    }, [favorites, fetchFormulaGPs]);
+    }, [favorites, fetchFormulaGPs, refreshKey]);
 
     return (
         <View>

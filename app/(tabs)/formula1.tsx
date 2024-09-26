@@ -3,11 +3,17 @@ import { View, ScrollView, ActivityIndicator, RefreshControl } from 'react-nativ
 import { getFormulaGPs } from '../utils/API';
 import { FormulaGP } from '../models/formula';
 import FormulaGPCard from '../components/formula1/GPCard';
+import TopBar from '../components/topBar';
+import { useColorScheme } from 'react-native';
+import { LightPalette, DarkPalette } from '../../constants/Palette';
 
 export default function Formula1Screen() {
   const [loading, setLoading] = useState(true);
   const [formulaGPs, setFormulaGPs] = useState<FormulaGP[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
+
+  const colorScheme = useColorScheme();
+  const palette = colorScheme === 'dark' ? DarkPalette : LightPalette;
 
   const fetchFormulaGPData = async () => {
     try {
@@ -41,11 +47,12 @@ export default function Formula1Screen() {
 
   return (
     <ScrollView 
-      style={{ flex: 1 }}
+      style={{ flex: 1, paddingTop: 50, backgroundColor: palette.background }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
+      <TopBar pageName="Formule 1" />
       <FormulaGPCard gps={formulaGPs} />
     </ScrollView>
   );
